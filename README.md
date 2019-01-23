@@ -41,6 +41,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Resize and crop
 * Set colors to 256 OR something low
 * Match colors to palette per pixel
-* Export replacement for `pixels.json` something like... `{"rgb(0,0,0)":[[x,y]]}`
+* Export replacement for [pixels.json](pixels.json) something like... `{"rgb(0,0,0)":[[x,y]]}`
 * set canvas pixel preview size
 

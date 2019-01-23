@@ -1,0 +1,106 @@
+doctype html
+html
+head
+title PPP - Pixel Plotting Program
+link(href="css/main.css" rel="stylesheet")
+script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+script(src="index.js")
+script.
+  $(document).ready(function() {
+    $('.config-form').on("submit",function(e) {
+      e.preventDefault();
+      init();
+    });
+    $('.output-tool-copy-gcode').on("click",function(e) {
+      e.preventDefault();
+      var t = $('#textarea-output')
+      t.select();
+      document.execCommand("copy");
+    });
+    $('.config-lift-distance').on("change", function(e){
+      $('.config-lift-distance-label').text("("+this.value+"mm)");
+    });
+    
+    $('.stat-color').on("click", function(e){
+      clear_canvas();
+      $('.stats > li').removeClass('enabled');
+      $(this).addClass('enabled');
+      add_to_canvas($(this).children('.stat-color-name').text(), PIXELS[$(this).children('.stat-color-name').text()]);
+    });
+    
+    $('.show-all').on("click", function(e){
+      clear_canvas();
+      $('.stats > li').removeClass('enabled');
+      $(this).addClass('enabled');
+      Object.keys(PIXELS).forEach(function(color, i) {
+          add_to_canvas(color, PIXELS[color]);
+      });
+    });
+      
+  });
+  
+body
+  .row
+    .input
+      h2 Image Config:
+      form.config-form
+        ul.config-list
+         li(class="config-option row")
+            label Image
+              small=" (.jpg)"
+            input.config-image(value="" disabled)
+         li(class="config-option row")
+            label Dimensions
+              small=" (px)"
+            input.config-height(value="" placeholder="height" disabled)
+            span.by="x"
+            input.config-width(value="" placeholder="width" disabled)
+         li(class="config-option row")
+           label Palette
+             small=" (color #)"
+           select.config-palette(disabled)
+             option(disabled) 92
+             option(disabled) 64
+             option(selected) 32
+      h2 Gcode Config:
+      form.config-form
+        ul.config-list
+          li(class="config-option row")
+            label JSON file
+            input.config-json(value="pixels.json")
+          li(class="config-option row")
+            label Pixel Size 
+              small (mm)
+            input.config-size(value=4)
+
+          li(class="config-option row")
+            label Pixel Fill Pattern 
+            select.config-fill
+              option(disabled) zizag 
+              option(disabled) x
+              option(selected) border
+          
+          li(class="config-option row")
+            label Lift Distance 
+              small.config-lift-distance-label (3mm)
+            input.config-lift-distance(value="3" type="range" min="2" max="10" step="1")
+            
+        input.button(type="submit")
+    div(class="output column")
+      h2 Preview:
+      .row
+        canvas#canvas-output(width=200 height=200)
+        ul.stats
+          li.show-all.enabled show all
+          - for(var i = 0; i < 50; i++)
+            li(class="row stat-color stat-color-"+i data-index=i)
+              span(class="stat-color-swatch stat-color-"+i+"-swatch")
+              span(class="stat-color-length stat-color-"+i+"-length")
+              span(class="stat-color-name stat-color-"+i+"-name")
+          
+
+      h2 Gcode:
+        a.output-tool-copy-gcode(href="#") Copy gcode
+      textarea#textarea-output
+
+  script(src="//localhost:35729/livereload.js")

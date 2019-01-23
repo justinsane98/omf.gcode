@@ -1,0 +1,203 @@
+@import 'main';
+
+* {
+  font-size: $font-size;
+  font-family: sans-serif;
+}
+body {
+  background: $white;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-size: $font-size;
+}
+    
+input {
+  padding: 5px;
+}
+
+textarea {
+  flex: 1;
+  background: #000;
+  font-family: monospace;
+  color: #fff;
+  border: none;
+  margin: 0;
+  overflow: visible;
+}
+
+label,.by {
+  line-height: 2em;
+}
+
+.by {
+  width: 20px;
+  text-align: center;
+
+}
+
+canvas {
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  body > & {
+    height: 100%;
+  }
+}
+
+.row > div {
+  height: 100%;
+}
+
+.input, select{
+  flex: 1;
+}
+
+h2 {
+  background: cyan;
+  color: darkcyan;
+  padding: 10px 20px;
+  margin: 0;
+  border: inset 10px rgba(0, 0, 0, 0.05); 
+  font-size: 1.5em;
+}
+.input h2 {
+    margin: 0 0 20px 0;
+}
+
+.output {
+  width: 400px;
+}
+
+.button {
+  margin-left: $label-width + $form-padding;
+  padding: 5px 10px;
+  background: cyan;
+  border: 2px solid rgba(0, 0, 0, 0.07);
+  border-radius: 3px;
+  outline: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: darkcyan;
+}
+
+.output-tools {
+  height: 50px;
+  align-items: center;
+  
+  a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+  }
+}
+
+.config-form {
+  padding: 0 $form-padding;
+  margin-bottom: 20px;
+}
+
+.config-list, .config-option {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.config-option {
+  margin-bottom: 10px;  
+}
+
+.config-option label {
+  margin-right: 20px; 
+  width: $label-width;
+}
+
+.config-option label small {
+  color: #ccc;
+}
+
+.config-option input{
+  flex: 1;
+}
+
+canvas {
+  width: 200px;
+  height: 200px;
+  background: $white;
+  border: none;
+}
+
+.output-tool-copy-gcode {
+  text-decoration: none;
+  float: right;
+  font-size: .5em;
+  line-height: 2em;
+  color: orangered;
+  position: relative;
+  opacity: .75;
+  &:hover {
+    opacity: 1;
+  }
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid cyan;
+    background: orangered;
+  }
+  &:after {
+    top: 5px;
+    left: -16px;
+  }
+  &:before {
+    top: 8px;
+    left: -13px;
+  }
+}
+.stats {
+  height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+  margin: 0;
+  @extend %ul-reset;
+  font-size: 0.75em;
+}
+
+.stat-color,.show-all {
+  line-height: 1.5em;
+  &:hover {
+    cursor: pointer;
+  }
+  &.enabled {
+    font-weight: bold;
+  }
+}
+
+.show-all {
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.stat-color-swatch {
+  flex-basis: 30px;
+}
+.stat-color-length {
+  flex-basis: 30px;
+  text-align: center;
+}
+.stat-color-name {
+  flex: 1;
+  text-align: right;
+}

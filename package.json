@@ -1,0 +1,21 @@
+{
+  "name": "plotitlikeitshot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Justin Shearer",
+  "license": "ISC",
+  "dependencies": {
+    "grunt": "^1.0.3",
+    "grunt-cli": "^1.3.2",
+    "grunt-contrib-sass": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-pug": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "node-sass": "^4.11.0"
+  }
+}

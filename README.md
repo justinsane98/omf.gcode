@@ -5,7 +5,7 @@ Photo to Pen Plotting Program
 ...
 
 ### Prerequisites
-WIP
+Javascript, HTML, CSS, Grunt, SASS, Pug
 
 ### Installing
 
@@ -17,7 +17,7 @@ Run `grunt`
 
 ## Built With
 
-* Brackets, etc...
+* Brackets, Chrome and Github
 
 ## Authors
 
@@ -37,10 +37,21 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [NC Viewer](https://ncviewer.com/)
 
 ## Todo
-* Add image from "file upload" to canvas
-* Resize and crop
+* crop?
 * Set colors to 256 OR something low
 * Match colors to palette per pixel
 * Export replacement for [pixels.json](pixels.json) something like... `{"rgb(0,0,0)":[[x,y]]}`
 * set canvas pixel preview size
+* minimize gcode output/debug mode/prod mode?
+* add buttons for "Update", 
+* X fill pattern
+* horizontal&vertical zigzag fill pattern
+* circle fill pattern
+* rounded pixel fill pattern
+* spiral fill pattern
+* repeating alphanumeric character as a fill pattern
 
+## UI notes
+* what is the flow like?
+* import image > set dimensions > set palette > set print settings
+* import settings vs export settings?

@@ -9,7 +9,7 @@ script.
   $(document).ready(function() {
     $('.config-form').on("submit",function(e) {
       e.preventDefault();
-      init();
+      output();
     });
     $('.output-tool-copy-gcode').on("click",function(e) {
       e.preventDefault();
@@ -36,7 +36,13 @@ script.
           add_to_canvas(color, PIXELS[color]);
       });
     });
-      
+    
+    $('.config-image').on("change", function(e){
+      e.preventDefault();
+      clear_canvas();
+      add_image_to_canvas(e);
+    });
+    init();
   });
   
 body
@@ -45,23 +51,24 @@ body
       h2 Image Config:
       form.config-form
         ul.config-list
-         li(class="config-option row")
-            label Image
-              small=" (.jpg)"
-            input.config-image(value="" disabled)
-         li(class="config-option row")
+          li(class="config-option row")
             label Dimensions
               small=" (px)"
-            input.config-height(value="" placeholder="height" disabled)
+            input.config-height(value="200" placeholder="height")
             span.by="x"
-            input.config-width(value="" placeholder="width" disabled)
-         li(class="config-option row")
-           label Palette
-             small=" (color #)"
-           select.config-palette(disabled)
-             option(disabled) 92
-             option(disabled) 64
-             option(selected) 32
+            input.config-width(value="200" placeholder="width")
+          li(class="config-option row")
+            label Palette
+              small=" (color #)"
+            select.config-palette
+              option(selected) Full Color
+              option(disabled) 92
+              option(disabled) 64
+              option(disabled) 32
+          li(class="config-option row")
+            label Image
+              small=" (.jpg)"
+            input.config-image(value="" type="file")
       h2 Gcode Config:
       form.config-form
         ul.config-list
@@ -87,7 +94,6 @@ body
             
         input.button(type="submit")
     div(class="output column")
-      h2 Preview:
       .row
         canvas#canvas-output(width=200 height=200)
         ul.stats
@@ -98,7 +104,6 @@ body
               span(class="stat-color-length stat-color-"+i+"-length")
               span(class="stat-color-name stat-color-"+i+"-name")
           
-
       h2 Gcode:
         a.output-tool-copy-gcode(href="#") Copy gcode
       textarea#textarea-output

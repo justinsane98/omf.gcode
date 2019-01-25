@@ -127,33 +127,43 @@ var clear_canvas = function(){
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
 }
 
+var add_image_to_canvas = function(e) {
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = new Image();
+      img.onload = function(){
+        var width = $('.config-width').val();
+        var height = $('.config-height').val();
+        if(height > 0 && width > 0){
+          CTX.drawImage(img,0,0, width, height);
+        } else {
+          CTX.drawImage(img,0,0);
+        }
+      }
+    img.src = event.target.result;
+  }
+  reader.readAsDataURL(e.target.files[0]);     
+}
+
 var log = function(type, message){
   $('.stat-'+type).text(message);
 };
 
-//var get_pixels = function(image) {
-//  getPixels(image, function(err, pixels) {
-//    if(err) {
-//      console.log("Bad image path");
-//      return;
-//    }
-//    var data = pixels.data;
-//    for(var pixel = 0; pixel < data.length; pixel++) {
-//      console.log(data[pixel] + " // " + pixel/4 );
-//      for(var rgb in pixels[pixel]) {
-//        //console.log(rgb);
-//      }
-//    }
-//  });
-//};
+var get_pixels_from_canvas = function() {
+  
+  var imageData = CTX.getImageData(0, 0, canvas.width, canvas.height);
+  
+  for (var i = 0; i < imageData.data.length; i++) {
+    imageData.data[i] = 255;
+  }
+  CTX.putImageData(imageData, 0, 0);
+  
+};
 
-var init = function() {
-SIZE = $('.config-size').val();
-FILL = $('.config-fill').val();
-LIFT_DISTANCE = $('.config-lift-distance').val();
-CANVAS = $('#canvas-output')[0];
-CTX = CANVAS.getContext('2d');
-CANVAS.width = CANVAS.height * (CANVAS.clientWidth / CANVAS.clientHeight);
+var output = function() {
+  SIZE = $('.config-size').val();
+  FILL = $('.config-fill').val();
+  LIFT_DISTANCE = $('.config-lift-distance').val();
   
   OUTPUT += startup();
 
@@ -180,5 +190,10 @@ CANVAS.width = CANVAS.height * (CANVAS.clientWidth / CANVAS.clientHeight);
 
   // FOR EACH COLOR
   // {  "rgb(000,000,000)" : [[x,y],,,],,,}
+}
 
+var init = function() {
+  CANVAS = $('#canvas-output')[0];
+  CTX = CANVAS.getContext('2d');
+  CANVAS.width = CANVAS.height * (CANVAS.clientWidth / CANVAS.clientHeight);
 };

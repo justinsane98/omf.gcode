@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed");
 .stats, .stats > li {
   list-style: none;
   padding: 0;
@@ -6,11 +7,11 @@
 
 * {
   font-size: 1em;
-  font-family: sans-serif;
 }
 
 body {
-  background: #fff;
+  background: #4f345a;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 html, body {
@@ -19,20 +20,70 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-size: 1em;
+  color: #fff;
+}
+
+header {
+  background: #38023b;
+  color: #9990a5;
+  margin: 0;
+  border: inset 10px rgba(0, 0, 0, 0.05);
+  font-size: 1.5em;
+}
+
+button {
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 input {
   padding: 5px;
 }
 
-textarea {
+.visual-output {
+  flex-basis: 200px;
+}
+
+.gcode-output {
   flex: 1;
-  background: #000;
+  background: black;
+  position: relative;
+}
+
+textarea {
+  background: black;
   font-family: monospace;
   color: #fff;
   border: none;
-  margin: 0;
   overflow: visible;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  height: 100%;
+  width: 386px;
+}
+
+nav {
+  justify-content: flex-end;
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: -5px;
+  position: relative;
+}
+nav button {
+  margin: 0 5px;
+  background: #4f345a;
+  border-radius: 15px;
+  border: 1px solid #29022B;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  padding: 5px 10px;
+}
+nav button:hover {
+  cursor: pointer;
+  color: white;
 }
 
 label, .by {
@@ -51,6 +102,7 @@ canvas {
 .column {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .row {
@@ -64,37 +116,38 @@ body > .row {
   height: 100%;
 }
 
-.input, select {
+select, .guide {
   flex: 1;
 }
 
 h2 {
-  background: cyan;
-  color: darkcyan;
-  padding: 10px 20px;
-  margin: 0;
-  border: inset 10px rgba(0, 0, 0, 0.05);
+  color: cyan;
   font-size: 1.5em;
+  padding: 10px 20px;
 }
 
-.input h2 {
+.logo {
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  font-size: 30px;
+}
+
+.guide {
+  background-color: #4f345a;
+}
+
+.dev-config {
+  background-color: #29022B;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+.dev-config h2 {
   margin: 0 0 20px 0;
 }
 
 .output {
   width: 400px;
-}
-
-.button {
-  margin-left: 220px;
-  padding: 5px 10px;
-  background: cyan;
-  border: 2px solid rgba(0, 0, 0, 0.07);
-  border-radius: 3px;
-  outline: 0;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: darkcyan;
 }
 
 .output-tools {
@@ -124,7 +177,7 @@ h2 {
 
 .config-option label {
   margin-right: 20px;
-  width: 200px;
+  display: block;
 }
 
 .config-option label small {
@@ -177,6 +230,8 @@ canvas {
   overflow-y: scroll;
   margin: 0;
   font-size: 0.75em;
+  background-color: white;
+  color: dimgrey;
 }
 
 .stat-color, .show-all {

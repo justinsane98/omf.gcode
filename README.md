@@ -43,7 +43,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Export replacement for [pixels.json](pixels.json) something like... `{"rgb(0,0,0)":[[x,y]]}`
 * set canvas pixel preview size
 * minimize gcode output/debug mode/prod mode?
-* add buttons for "Update", 
+* add buttons for "Update"
+* add error check for adding an image to see IF there is an image
+* clear canvas on "generate gcode"
+
+## Features
 * X fill pattern
 * horizontal&vertical zigzag fill pattern
 * circle fill pattern

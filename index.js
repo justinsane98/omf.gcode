@@ -142,7 +142,7 @@ var add_image_to_canvas = function(e) {
       }
     img.src = event.target.result;
   }
-  reader.readAsDataURL(e.target.files[0]);     
+  reader.readAsDataURL($('.config-image').prop('files')[0]);     
 }
 
 var log = function(type, message){
@@ -154,6 +154,7 @@ var get_pixels_from_canvas = function() {
   var imageData = CTX.getImageData(0, 0, canvas.width, canvas.height);
   
   for (var i = 0; i < imageData.data.length; i++) {
+    
     imageData.data[i] = 255;
   }
   CTX.putImageData(imageData, 0, 0);

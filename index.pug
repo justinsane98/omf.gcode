@@ -7,11 +7,11 @@ script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb
 script(src="index.js")
 script.
   $(document).ready(function() {
-    $('.config-form').on("submit",function(e) {
+    $('.action-generate-gcode').on("click",function(e) {
       e.preventDefault();
       output();
     });
-    $('.output-tool-copy-gcode').on("click",function(e) {
+    $('.action-copy-gcode').on("click",function(e) {
       e.preventDefault();
       var t = $('#textarea-output')
       t.select();
@@ -37,7 +37,7 @@ script.
       });
     });
     
-    $('.config-image').on("change", function(e){
+    $('.action-add-image').on("click", function(e){
       e.preventDefault();
       clear_canvas();
       add_image_to_canvas(e);
@@ -46,18 +46,46 @@ script.
   });
   
 body
+  header
+    nav.row
+      div.logo ppp
+      div
+        button.action-add-image Add Image
+      div
+        button.action-generate-gcode Generate Gcode
+      div
+        button.action-copy-gcode Copy Gcode
+        
   .row
-    .input
-      h2 Image Config:
+    .guide
+      h2 How to add an image:
+      ol
+        li Select an image from your computer
+        li Set desired height and width
+        li Choose the color palette
+        li Click "Add image"
+      h2 How to generate Gcode:
+      ol
+        li Select the data source
+        li Set desired pixel size
+        li Choose the fill pattern
+        li Tweak the lift distance
+        li Click "Generate Gcode"
+      h2 What to do with the Gcode:
+      ol
+        li ...
+    .dev-config
+      h2 Config:
       form.config-form
         ul.config-list
-          li(class="config-option row")
-            label Dimensions
+          li.config-option
+            label Height
               small=" (px)"
             input.config-height(value="200" placeholder="height")
-            span.by="x"
+            label Width
+              small=" (px)"
             input.config-width(value="200" placeholder="width")
-          li(class="config-option row")
+          li.config-option
             label Palette
               small=" (color #)"
             select.config-palette
@@ -65,36 +93,33 @@ body
               option(disabled) 92
               option(disabled) 64
               option(disabled) 32
-          li(class="config-option row")
+          li.config-option
             label Image
               small=" (.jpg)"
             input.config-image(value="" type="file")
-      h2 Gcode Config:
       form.config-form
         ul.config-list
-          li(class="config-option row")
+          li.config-option
             label JSON file
             input.config-json(value="pixels.json")
-          li(class="config-option row")
+          li.config-option
             label Pixel Size 
               small (mm)
             input.config-size(value=4)
 
-          li(class="config-option row")
+          li.config-option
             label Pixel Fill Pattern 
             select.config-fill
               option(disabled) zizag 
               option(disabled) x
               option(selected) border
           
-          li(class="config-option row")
+          li.config-option
             label Lift Distance 
               small.config-lift-distance-label (3mm)
             input.config-lift-distance(value="3" type="range" min="2" max="10" step="1")
-            
-        input.button(type="submit")
-    div(class="output column")
-      .row
+    div.output.column
+      .visual-output.row
         canvas#canvas-output(width=200 height=200)
         ul.stats
           li.show-all.enabled show all
@@ -103,9 +128,7 @@ body
               span(class="stat-color-swatch stat-color-"+i+"-swatch")
               span(class="stat-color-length stat-color-"+i+"-length")
               span(class="stat-color-name stat-color-"+i+"-name")
-          
-      h2 Gcode:
-        a.output-tool-copy-gcode(href="#") Copy gcode
-      textarea#textarea-output
+      .gcode-output
+        textarea#textarea-output
 
   script(src="//localhost:35729/livereload.js")

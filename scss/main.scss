@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+
 $white: #fff;
-$label-width: 200px;
+$black: #000;
 $form-padding: 20px;
 $font-size: 1em;
-
+$purple: #38023b;
+$light-purple: #4f345a;
+$lighter-purple: #9990a5;
+$dark-purple: #29022B;
 
 %ul-reset, %ul-reset > li {
   list-style: none;

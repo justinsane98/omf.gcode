@@ -5,6 +5,40 @@ var FILL = "";
 var LIFT_DISTANCE = 0; // mm
 var CANVAS = "";
 var CTX = "";
+var THIRTY_TWO = [
+			[214, 160, 144],
+			[254, 59, 30],
+			[161, 44, 50],
+			[250, 47, 122],
+			[251, 159, 218],
+			[230, 28, 247],
+			[153, 47, 124],
+			[71, 1, 31],
+			[5, 17, 85],
+			[79, 2, 236],
+			[45, 105, 203],
+			[0, 166, 238],
+			[111, 235, 255],
+			[8, 162, 154],
+			[42, 102, 106],
+			[6, 54, 25],
+			[0, 0, 0],
+			[74, 73, 87],
+			[142, 123, 164],
+			[183, 192, 255],
+			[255, 255, 255],
+			[172, 190, 156],
+			[130, 124, 112],
+			[90, 59, 28],
+			[174, 101, 7],
+			[247, 170, 48],
+			[244, 234, 92],
+			[155, 149, 0],
+			[86, 98, 4],
+			[17, 150, 59],
+			[81, 225, 19],
+			[8, 253, 204]
+		];
 
 var code = function(gcode, comment){
     comment = comment || ""; 
@@ -119,7 +153,7 @@ var add_to_canvas = function(color, locations) {
       var x = locations[location][0];
       var y = locations[location][1];
       CTX.fillStyle = color;
-      CTX.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
+      CTX.fillRect(x, y, 1, 1);
   }
 }
 
@@ -149,16 +183,45 @@ var log = function(type, message){
   $('.stat-'+type).text(message);
 };
 
+
+
+
+
 var get_pixels_from_canvas = function() {
-  
-  var imageData = CTX.getImageData(0, 0, canvas.width, canvas.height);
-  
-  for (var i = 0; i < imageData.data.length; i++) {
-    
-    imageData.data[i] = 255;
+  var width = parseInt($('.config-width').val(), 10);
+  var height = parseInt($('.config-height').val(), 10);
+  var imageData = CTX.getImageData(0, 0, width, height);
+  for (var i = 0; i < imageData.data.length; i+=4) {
+      var r = imageData.data[i];
+      var g = imageData.data[i+1];
+      var b = imageData.data[i+2];
+      var a = imageData.data[i+3];
+      //console.log(i + " = rgb(" + r + ", " + g + ", "+ b +")");
   }
-  CTX.putImageData(imageData, 0, 0);
   
+  var q = new RgbQuant({
+    method: 2,
+    colors: 32,
+    palette: THIRTY_TWO,
+    reIndex: true,
+    useCache: false,
+  // dithKern: "FloydSteinberg",
+  // dithDelta: .2
+  });
+  // analyze histograms
+  q.sample(imageData);
+
+  // build palette
+  var pal = q.palette();
+
+  // reduce images
+  console.log(imageData);
+  
+  var reducedImageData = q.reduce(imageData);
+
+  imageData.data.set(reducedImageData);
+  
+  CTX.putImageData(imageData, 27, 0);
 };
 
 var output = function() {

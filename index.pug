@@ -4,7 +4,8 @@ head
 title PPP - Pixel Plotting Program
 link(href="css/main.css" rel="stylesheet")
 script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
-script(src="index.js")
+script(src="js/rgbQuant.js")
+script(src="js/index.js")
 script.
   $(document).ready(function() {
     $('.action-generate-gcode').on("click",function(e) {
@@ -37,11 +38,17 @@ script.
       });
     });
     
-    $('.action-add-image').on("click", function(e){
+    $('.action-add-image').on("click", function(e) {
       e.preventDefault();
       clear_canvas();
       add_image_to_canvas(e);
     });
+    
+    $('.action-get-pixels').on("click", function(e) {
+      e.preventDefault();
+      get_pixels_from_canvas();
+    });
+    
     init();
   });
   
@@ -49,6 +56,8 @@ body
   header
     nav.row
       div.logo ppp
+      div
+        button.action-get-pixels Get Pixels
       div
         button.action-add-image Add Image
       div
@@ -81,10 +90,10 @@ body
           li.config-option
             label Height
               small=" (px)"
-            input.config-height(value="200" placeholder="height")
+            input.config-height(value="26" placeholder="height")
             label Width
               small=" (px)"
-            input.config-width(value="200" placeholder="width")
+            input.config-width(value="26" placeholder="width")
           li.config-option
             label Palette
               small=" (color #)"
@@ -105,7 +114,7 @@ body
           li.config-option
             label Pixel Size 
               small (mm)
-            input.config-size(value=4)
+            input.config-size(value=1)
 
           li.config-option
             label Pixel Fill Pattern 

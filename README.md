@@ -46,6 +46,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * add buttons for "Update"
 * add error check for adding an image to see IF there is an image
 * clear canvas on "generate gcode"
+* compile js add watch in gruntfile
 
 ## Features
 * X fill pattern
@@ -59,3 +60,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * what is the flow like?
 * import image > set dimensions > set palette > set print settings
 * import settings vs export settings?
+* canvas height x width (pixel ~= mm)
+* import image to canvas to "fit"

@@ -38,6 +38,11 @@ var THIRTY_TWO = [
 			[17, 150, 59],
 			[81, 225, 19],
 			[8, 253, 204]
+    ];
+
+    var TWO = [
+			[214, 160, 144],
+			[254, 59, 30]
 		];
 
 var code = function(gcode, comment){
@@ -182,10 +187,22 @@ var add_image_to_canvas = function(e) {
 var log = function(type, message){
   $('.stat-'+type).text(message);
 };
-
-
-
-
+//externalize these params to UI config options
+//externalize width/height...
+var quantize = function(palette, x, y) {
+  var width = parseInt($('.config-width').val(), 10);
+  var height = parseInt($('.config-height').val(), 10);
+  var imageData = CTX.getImageData(0, 0, width, height);
+  var q = new RgbQuant({
+    method: 2,
+    colors: palette.length,
+    palette: palette,
+    reIndex: true
+  });
+  var reducedImageData = q.reduce(imageData);
+  imageData.data.set(reducedImageData);
+  CTX.putImageData(imageData, x, y);
+}
 
 var get_pixels_from_canvas = function() {
   var width = parseInt($('.config-width').val(), 10);
@@ -195,33 +212,17 @@ var get_pixels_from_canvas = function() {
       var r = imageData.data[i];
       var g = imageData.data[i+1];
       var b = imageData.data[i+2];
-      var a = imageData.data[i+3];
       //console.log(i + " = rgb(" + r + ", " + g + ", "+ b +")");
   }
-  
-  var q = new RgbQuant({
-    method: 2,
-    colors: 32,
-    palette: THIRTY_TWO,
-    reIndex: true,
-    useCache: false,
-  // dithKern: "FloydSteinberg",
-  // dithDelta: .2
-  });
-  // analyze histograms
-  q.sample(imageData);
 
-  // build palette
-  var pal = q.palette();
-
-  // reduce images
-  console.log(imageData);
+  // QUANTIZE OG
+  quantize(THIRTY_TWO, 27, 0)
   
-  var reducedImageData = q.reduce(imageData);
+  // QUANTIZE 2
+  quantize(TWO, 0, 27)
 
-  imageData.data.set(reducedImageData);
-  
-  CTX.putImageData(imageData, 27, 0);
+  // QUANTIZE BW
+  quantize([[0,0,0],[200,200,200]], 27, 27)
 };
 
 var output = function() {

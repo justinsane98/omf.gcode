@@ -37,16 +37,14 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [NC Viewer](https://ncviewer.com/)
 
 ## Todo
-* crop?
-* Set colors to 256 OR something low
-* Match colors to palette per pixel
-* Export replacement for [pixels.json](pixels.json) something like... `{"rgb(0,0,0)":[[x,y]]}`
-* set canvas pixel preview size
+* exclude background color from output (canvas and gcode)
+* crop initial image
+* set canvas pixel preview size/zoom/scale
 * minimize gcode output/debug mode/prod mode?
-* add buttons for "Update"
 * add error check for adding an image to see IF there is an image
-* clear canvas on "generate gcode"
 * compile js add watch in gruntfile
+* verify pixel output size is tied to config-size
+* write cooresponding draw functions for canvas to mirror gcode (fill, spacing, etc)
 
 ## Features
 * X fill pattern

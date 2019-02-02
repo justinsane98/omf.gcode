@@ -92,12 +92,15 @@ body
             select.config-palette
               option(selected) THIRTY_TWO
               option TWO
+          li.config-option
+            label Background Color
+              small=" (exclude in output)"
+            select.config-palette
+              option(selected) WHITE
+              option BLACK
 
       form.config-form
         ul.config-list
-          li.config-option
-            label JSON file
-            input.config-json(value="pixels.json")
           li.config-option
             label Pixel Size 
               small (mm)

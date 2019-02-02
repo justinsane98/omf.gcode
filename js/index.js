@@ -236,7 +236,6 @@ var get_pixels_from_canvas = function() {
 };
 
 var output = function() {
-  SIZE = $('.config-size').val();
   FILL = $('.config-fill').val();
   LIFT_DISTANCE = $('.config-lift-distance').val();
   
@@ -244,16 +243,16 @@ var output = function() {
 
   // main routine
   OUTPUT += title("MAIN");
-  
+  var pixel_count = 0;
   Object.keys(PIXELS).forEach(function(color, i) {
     $(".stat-color-"+i+"-swatch").css('background-color', color);
     log("color-"+i+"-name", color);
-    
     log("color-"+i+"-length", PIXELS[color].length);
     OUTPUT += draw_color(color, PIXELS[color]);
     add_to_canvas(color, PIXELS[color]);
+    pixel_count++
   });
-  
+  $('.show-all').text('show all (' + pixel_count+ ')');
   OUTPUT += shutdown();
   $('#textarea-output').val(OUTPUT); 
 }

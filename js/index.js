@@ -5,7 +5,9 @@ var FILL = "";
 var LIFT_DISTANCE = 0; // mm
 var CANVAS = "";
 var CTX = "";
-var THIRTY_TWO = [
+var PALETTE = 
+  {
+   "THIRTY_TWO" : [
 			[214, 160, 144],
 			[254, 59, 30],
 			[161, 44, 50],
@@ -38,12 +40,12 @@ var THIRTY_TWO = [
 			[17, 150, 59],
 			[81, 225, 19],
 			[8, 253, 204]
-    ];
-
-    var TWO = [
+    ],
+    "TWO" : [
 			[214, 160, 144],
 			[254, 59, 30]
-		];
+    ]
+}
 
 var code = function(gcode, comment){
     comment = comment || ""; 
@@ -187,11 +189,11 @@ var add_image_to_canvas = function(e) {
 var log = function(type, message){
   $('.stat-'+type).text(message);
 };
-//externalize these params to UI config options
-//externalize width/height...
-var quantize = function(palette, x, y) {
+
+var quantize = function() {
   var width = parseInt($('.config-width').val(), 10);
   var height = parseInt($('.config-height').val(), 10);
+  var palette = PALETTE[$('.config-palette').val()];
   var imageData = CTX.getImageData(0, 0, width, height);
   var q = new RgbQuant({
     method: 2,
@@ -201,7 +203,8 @@ var quantize = function(palette, x, y) {
   });
   var reducedImageData = q.reduce(imageData);
   imageData.data.set(reducedImageData);
-  CTX.putImageData(imageData, x, y);
+  clear_canvas();
+  CTX.putImageData(imageData, 0, 0);
 }
 
 var get_pixels_from_canvas = function() {
@@ -215,14 +218,21 @@ var get_pixels_from_canvas = function() {
       //console.log(i + " = rgb(" + r + ", " + g + ", "+ b +")");
   }
 
-  // QUANTIZE OG
-  quantize(THIRTY_TWO, 27, 0)
-  
-  // QUANTIZE 2
-  quantize(TWO, 0, 27)
+  // QUANTIZE
+  quantize();
 
-  // QUANTIZE BW
-  quantize([[0,0,0],[200,200,200]], 27, 27)
+  // for each pixel in PIXELS
+  for(var x=0;x<width;x++){
+    for(var y=0;y<height;y++){
+      var data = CTX.getImageData(x, y, 1, 1).data;
+      var color = "rgb(" + data[0] + ","  + data[1] + "," + data[2] + ")";
+      if(!PIXELS.hasOwnProperty(color)){
+        PIXELS[color] = [[x,y]];
+      } else {
+        PIXELS[color].push([x,y]);
+      }
+    }
+  }
 };
 
 var output = function() {
@@ -235,26 +245,17 @@ var output = function() {
   // main routine
   OUTPUT += title("MAIN");
   
-  $.getJSON($('.config-json').val(), function(data){
-    PIXELS = data;
-    Object.keys(data).forEach(function(color, i) {
-      $(".stat-color-"+i+"-swatch").css('background-color', color);
-      log("color-"+i+"-name", color);
-      
-      log("color-"+i+"-length", data[color].length);
-      OUTPUT += draw_color(color, data[color]);
-      add_to_canvas(color, data[color]);
-    });
+  Object.keys(PIXELS).forEach(function(color, i) {
+    $(".stat-color-"+i+"-swatch").css('background-color', color);
+    log("color-"+i+"-name", color);
     
-    OUTPUT += shutdown();
-    $('#textarea-output').val(OUTPUT); 
+    log("color-"+i+"-length", PIXELS[color].length);
+    OUTPUT += draw_color(color, PIXELS[color]);
+    add_to_canvas(color, PIXELS[color]);
   });
   
-  // get the pixels from the image
-  //OUTPUT += get_pixels("balloon26.jpg");
-
-  // FOR EACH COLOR
-  // {  "rgb(000,000,000)" : [[x,y],,,],,,}
+  OUTPUT += shutdown();
+  $('#textarea-output').val(OUTPUT); 
 }
 
 var init = function() {

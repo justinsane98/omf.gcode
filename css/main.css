@@ -116,7 +116,7 @@ body > .row {
   height: 100%;
 }
 
-select, .guide {
+select, .dev-config {
   flex: 1;
 }
 
@@ -135,6 +135,7 @@ h2 {
 
 .guide {
   background-color: #4f345a;
+  width: 80px;
 }
 
 .dev-config {

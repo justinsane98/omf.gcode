@@ -57,9 +57,10 @@ body
     nav.row
       div.logo ppp
       div
-        button.action-get-pixels Get Pixels
-      div
         button.action-add-image Add Image
+      div
+        button.action-get-pixels Get Pixels
+
       div
         button.action-generate-gcode Generate Gcode
       div
@@ -67,45 +68,31 @@ body
         
   .row
     .guide
-      h2 How to add an image:
-      ol
-        li Select an image from your computer
-        li Set desired height and width
-        li Choose the color palette
-        li Click "Add image"
-      h2 How to generate Gcode:
-      ol
-        li Select the data source
-        li Set desired pixel size
-        li Choose the fill pattern
-        li Tweak the lift distance
-        li Click "Generate Gcode"
-      h2 What to do with the Gcode:
-      ol
-        li ...
     .dev-config
       h2 Config:
       form.config-form
         ul.config-list
           li.config-option
-            label Height
-              small=" (px)"
-            input.config-height(value="26" placeholder="height")
-            label Width
-              small=" (px)"
-            input.config-width(value="26" placeholder="width")
+            label Image
+              small=" (.jpg)"
+            input.config-image(value="" type="file")
+          li.config-option
+            .row
+              .col
+                label Height
+                  small=" (px)"
+                input.config-height(value="26" placeholder="height")
+              .col
+                label Width
+                  small=" (px)"
+                input.config-width(value="26" placeholder="width")
           li.config-option
             label Palette
               small=" (color #)"
             select.config-palette
-              option(selected) Full Color
-              option(disabled) 92
-              option(disabled) 64
-              option(disabled) 32
-          li.config-option
-            label Image
-              small=" (.jpg)"
-            input.config-image(value="" type="file")
+              option(selected) THIRTY_TWO
+              option TWO
+
       form.config-form
         ul.config-list
           li.config-option

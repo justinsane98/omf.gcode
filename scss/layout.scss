@@ -111,7 +111,7 @@ canvas {
   height: 100%;
 }
 
-select, .guide {
+select, .dev-config {
   flex: 1;
 }
 
@@ -129,6 +129,7 @@ h2 {
 }
 .guide{
   background-color: $light-purple;
+  width: 80px;
 }
 
 .dev-config {

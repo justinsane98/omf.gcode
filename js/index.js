@@ -142,12 +142,13 @@ var draw_color = function(color, locations) {
   var output = "";
   output += color_change(color);
   var count = 0;
+  var SIZE = $('.config-size').val();
   for (var location in locations) {
     if(location){
       var x = (locations[location][0] * SIZE);
       var y = (locations[location][1] * SIZE);
       output += goToPixel(x, y);
-      output += fillSquare(x, y, SIZE, SIZE);
+      output += fillSquare(x, y, SIZE-1, SIZE-1);
     }
     
   }
@@ -175,6 +176,8 @@ var add_image_to_canvas = function(e) {
       img.onload = function(){
         var width = $('.config-width').val();
         var height = $('.config-height').val();
+        CANVAS.width = width;
+        CANVAS.height = height;
         if(height > 0 && width > 0){
           CTX.drawImage(img,0,0, width, height);
         } else {
@@ -226,14 +229,24 @@ var get_pixels_from_canvas = function() {
     for(var y=0;y<height;y++){
       var data = CTX.getImageData(x, y, 1, 1).data;
       var color = "rgb(" + data[0] + ","  + data[1] + "," + data[2] + ")";
-      if(!PIXELS.hasOwnProperty(color)){
-        PIXELS[color] = [[x,y]];
-      } else {
-        PIXELS[color].push([x,y]);
+      if(color !=$('.config-background').val()){
+        if(!PIXELS.hasOwnProperty(color)){
+          PIXELS[color] = [[x,y]];
+        } else {
+          PIXELS[color].push([x,y]);
+        }
       }
     }
   }
 };
+
+var resize_canvas = function() {
+  var zoom  = parseInt($('.config-zoom').val(), 10);
+  var width = parseInt($('.config-width').val(), 10);
+  var height = parseInt($('.config-height').val(), 10);
+  CANVAS.style.width = (width * zoom) + "px";
+  CANVAS.style.height = (height * zoom) + "px";
+}
 
 var output = function() {
   FILL = $('.config-fill').val();

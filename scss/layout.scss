@@ -90,14 +90,26 @@ label,.by {
 
 }
 
-canvas {
-  width: 100%;
+.canvas-wrapper {
+  display: flex;
+  height: 200px;
+  background: $white;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.canvas-wrapper, .stats {
+  flex: 1;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding-right: 10px;
 }
 
 .row {
@@ -135,7 +147,6 @@ h2 {
 .dev-config {
   background-color: $dark-purple;
   padding: 20px 0;
-  overflow-y: auto;
   h2 {
     margin: 0 0 20px 0;
   }
@@ -169,6 +180,17 @@ h2 {
 
 .config-option {
   margin-bottom: 10px;  
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -26px;
+    width: 10px;
+    height: 10px;
+    background: $purple;
+    border-radius: 5px;
+  }
 }
 
 .config-option label {
@@ -185,10 +207,9 @@ h2 {
 }
 
 canvas {
-  width: 200px;
-  height: 200px;
-  background: $white;
+  width: auto;
   border: none;
+  image-rendering: pixelated; 
 }
 
 .output-tool-copy-gcode {
@@ -256,4 +277,9 @@ canvas {
 .stat-color-name {
   flex: 1;
   text-align: right;
+}
+
+.config-image {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
 }

@@ -8,16 +8,19 @@ script(src="js/rgbQuant.js")
 script(src="js/index.js")
 script.
   $(document).ready(function() {
+    
     $('.action-generate-gcode').on("click",function(e) {
       e.preventDefault();
       output();
     });
+
     $('.action-copy-gcode').on("click",function(e) {
       e.preventDefault();
       var t = $('#textarea-output')
       t.select();
       document.execCommand("copy");
     });
+
     $('.config-lift-distance').on("change", function(e){
       $('.config-lift-distance-label').text("("+this.value+"mm)");
     });
@@ -42,11 +45,18 @@ script.
       e.preventDefault();
       clear_canvas();
       add_image_to_canvas(e);
+      resize_canvas();
     });
     
     $('.action-get-pixels').on("click", function(e) {
       e.preventDefault();
       get_pixels_from_canvas();
+    });
+
+    $('.config-zoom').on("change", function(e){
+      console.log($(this).val());
+      e.preventDefault();
+      resize_canvas();
     });
     
     init();
@@ -56,6 +66,8 @@ body
   header
     nav.row
       div.logo ppp
+      div
+        input.config-zoom(value="2" type="range" min="1" max="10" step="1")
       div
         button.action-add-image Add Image
       div
@@ -69,7 +81,6 @@ body
   .row
     .guide
     .dev-config
-      h2 Config:
       form.config-form
         ul.config-list
           li.config-option
@@ -78,11 +89,11 @@ body
             input.config-image(value="" type="file")
           li.config-option
             .row
-              .col
+              .column
                 label Height
                   small=" (px)"
                 input.config-height(value="26" placeholder="height")
-              .col
+              .column
                 label Width
                   small=" (px)"
                 input.config-width(value="26" placeholder="width")
@@ -95,16 +106,16 @@ body
           li.config-option
             label Background Color
               small=" (exclude in output)"
-            select.config-palette
-              option(selected) WHITE
-              option BLACK
+            select.config-background
+              option(selected) rgb(255,255,255)
+              option rgb(0,0,0)
 
       form.config-form
         ul.config-list
           li.config-option
             label Pixel Size 
               small (mm)
-            input.config-size(value=1)
+            input.config-size(value=5)
 
           li.config-option
             label Pixel Fill Pattern 
@@ -119,7 +130,8 @@ body
             input.config-lift-distance(value="3" type="range" min="2" max="10" step="1")
     div.output.column
       .visual-output.row
-        canvas#canvas-output(width=200 height=200)
+        .canvas-wrapper
+          canvas#canvas-output
         ul.stats
           li.show-all.enabled show all
           - for(var i = 0; i < 50; i++)

@@ -1,4 +1,4 @@
-![Alt text](/screenshot.png?raw=true "OMF.Gcode")
+![OMF.Gcode](https://raw.githubusercontent.com/justinsane98/omf.gcode/master/screeshot.png "OMF.Gcode")
 
 # OMF.Gcode
 Original photo + Modifications = Fabication ready Gcode

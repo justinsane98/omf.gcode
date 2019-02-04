@@ -1,49 +1,41 @@
-# PPP
-Photo to Pen Plotting Program
+# OMF.Gcode
+Original photo + Modifications = Fabication ready Gcode
+Import any image, select a palette and generate gcode to run on a Marlin
 
 ## Getting Started
 ...
 
 ### Prerequisites
-Javascript, HTML, CSS, Grunt, SASS, Pug
+Javascript, HTML, CSS, Grunt, SASS, Pug/Jade
 
-### Installing
-
+### Install and Run
+Run `npm install`
 Run `grunt`
 
 ## Devlopment
-
-Run `grunt`
+Run `grunt watch`
 
 ## Built With
-
-* Brackets, Chrome and Github
+* VS Code, Chrome and Github
 
 ## Authors
-
 * **Justin Shearer** - *Initial work* - [Justinsane98](https://github.com/Justinsane98)
-
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License.
 
 ## Acknowledgments
-
 * [RgbQuant](https://github.com/leeoniya/RgbQuant.js)
 * [Neoquant](https://github.com/unindented/neuquant-js)
 * [G-Code Q'n'dirty toolpath simulator](https://nraynaud.github.io/webgcode/)
 * [NC Viewer](https://ncviewer.com/)
+* [Marlin Gcode] (http://marlinfw.org/meta/gcode/)
 
 ## Todo
-* exclude background color from output (canvas and gcode)
 * crop initial image
-* set canvas pixel preview size/zoom/scale
 * minimize gcode output/debug mode/prod mode?
 * add error check for adding an image to see IF there is an image
-* compile js add watch in gruntfile
-* verify pixel output size is tied to config-size
 * write cooresponding draw functions for canvas to mirror gcode (fill, spacing, etc)
 
 ## Features

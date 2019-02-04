@@ -3,6 +3,12 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    concat: {
+        dist: {
+          src: ['scripts/*.js'],
+          dest: 'js/app.js',
+      }
+    },
     pug: {
       compile: {
         options: {
@@ -27,6 +33,10 @@ module.exports = function(grunt) {
       }
     },
    watch: {
+     scripts: {
+      files: ['scripts/**/*.js'],
+      tasks: ['concat']
+     },
       options: {
           livereload: true
         },
@@ -34,13 +44,14 @@ module.exports = function(grunt) {
         files: 'scss/*.scss',
         tasks: ['sass']
       },
-     pug: {
+      pug: {
        files : '*.pug',
        tasks: ['pug']
      }
     }
   });
   
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');

@@ -150,7 +150,6 @@ var draw_color = function(color, locations) {
       output += goToPixel(x, y);
       output += fillSquare(x, y, SIZE-1, SIZE-1);
     }
-    
   }
   return output;
 };
@@ -167,6 +166,26 @@ var add_to_canvas = function(color, locations) {
 
 var clear_canvas = function(){
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+}
+
+var clear_stats = function() {
+  var pixel_count = 0;
+  $('.stat-color ').each(function(i){
+    $(".stat-color-"+i+"-swatch").css('background-color', "rgba(255,255,255)");
+    log("color-"+i+"-name", "");
+    log("color-"+i+"-length", "");
+  });
+  $('.show-all').text('');
+}
+
+var add_stat = function(i, color) {
+    $(".stat-color-"+i+"-swatch").css('background-color', color);
+    log("color-"+i+"-name", color);
+    log("color-"+i+"-length", PIXELS[color].length);
+}
+
+var clear_gcode = function() {
+  $('#textarea-output').val(""); 
 }
 
 var add_image_to_canvas = function(e) {
@@ -251,21 +270,19 @@ var resize_canvas = function() {
 var output = function() {
   FILL = $('.config-fill').val();
   LIFT_DISTANCE = $('.config-lift-distance').val();
-  
+  OUTPUT = ""; // reset
   OUTPUT += startup();
-
   // main routine
   OUTPUT += title("MAIN");
+
   var pixel_count = 0;
   Object.keys(PIXELS).forEach(function(color, i) {
-    $(".stat-color-"+i+"-swatch").css('background-color', color);
-    log("color-"+i+"-name", color);
-    log("color-"+i+"-length", PIXELS[color].length);
     OUTPUT += draw_color(color, PIXELS[color]);
-    add_to_canvas(color, PIXELS[color]);
+    add_stat(i, color);
     pixel_count++
   });
   $('.show-all').text('show all (' + pixel_count+ ')');
+  
   OUTPUT += shutdown();
   $('#textarea-output').val(OUTPUT); 
 }

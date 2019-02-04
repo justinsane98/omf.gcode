@@ -1,9 +1,6 @@
 @import 'main';
-* {
-  font-size: $font-size;
-}
-
 body {
+  font-size: 0.9em;
   background: $light-purple;
   font-family: 'Roboto Condensed', sans-serif;
 }
@@ -181,16 +178,6 @@ h2 {
 .config-option {
   margin-bottom: 10px;  
   position: relative;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: -26px;
-    width: 10px;
-    height: 10px;
-    background: $purple;
-    border-radius: 5px;
-  }
 }
 
 .config-option label {

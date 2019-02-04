@@ -5,11 +5,8 @@
   margin: 0;
 }
 
-* {
-  font-size: 1em;
-}
-
 body {
+  font-size: 0.9em;
   background: #4f345a;
   font-family: 'Roboto Condensed', sans-serif;
 }
@@ -186,16 +183,6 @@ h2 {
 .config-option {
   margin-bottom: 10px;
   position: relative;
-}
-.config-option:before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: -26px;
-  width: 10px;
-  height: 10px;
-  background: #38023b;
-  border-radius: 5px;
 }
 
 .config-option label {

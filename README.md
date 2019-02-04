@@ -1,19 +1,24 @@
 # OMF.Gcode
 Original photo + Modifications = Fabication ready Gcode
+
 Import any image, select a palette and generate gcode to run on device running Marlin firmware. 
 
 ## Getting Started
 ...
 
+
 ### Prerequisites
 Javascript, HTML, CSS, Grunt, SASS, Pug/Jade
+
 
 ### Install and Run
 Run `npm install`
 Run `grunt`
 
+
 ## Devlopment
 Run `grunt watch`
+
 
 ## Built With
 * VS Code, Chrome and Github
@@ -22,8 +27,10 @@ Run `grunt watch`
 * **Justin Shearer** - *Initial work* - [Justinsane98](https://github.com/Justinsane98)
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
+
 ## License
 This project is licensed under the MIT License.
+
 
 ## Acknowledgments
 * [RgbQuant](https://github.com/leeoniya/RgbQuant.js)
@@ -31,6 +38,7 @@ This project is licensed under the MIT License.
 * [G-Code Q'n'dirty toolpath simulator](https://nraynaud.github.io/webgcode/)
 * [NC Viewer](https://ncviewer.com/)
 * [Marlin Gcode] (http://marlinfw.org/meta/gcode/)
+
 
 ## Todo
 * crop initial image
@@ -58,6 +66,7 @@ This project is licensed under the MIT License.
 * move generate action into the Fabrication section as CTA
 * move copy gcode into the gcode section (pin to top right)
 
+
 ## Features
 * X fill pattern
 * horizontal&vertical zigzag fill pattern
@@ -67,6 +76,7 @@ This project is licensed under the MIT License.
 * repeating alphanumeric character as a fill pattern
 * allow for multiple type of firmware and versions
 
+
 ## UI notes
 * what is the flow like?
 * Example:
@@ -74,5 +84,7 @@ This project is licensed under the MIT License.
     * Modify (set height/width, palette, background color)
     * generate Fabrication ready Gcode
 
+
 ## Bugs
 * after selecting a single color layer, the opacity is wierd... the canvas is now super light
+

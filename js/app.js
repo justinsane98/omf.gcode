@@ -160,7 +160,7 @@ var add_to_canvas = function(color, locations) {
       var x = locations[location][0];
       var y = locations[location][1];
       CTX.fillStyle = color;
-      CTX.fillRect(x, y, 1, 1);
+      CTX.fillRect(x, y, 0.5, 0.5);
   }
 }
 

@@ -1,7 +1,7 @@
 doctype html
 html
 head
-title PPP - Pixel Plotting Program
+title OMF.Gcode
 link(href="css/main.css" rel="stylesheet")
 script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
 script(src="js/app.js")
@@ -80,13 +80,13 @@ script.
 body
   header
     nav.row
-      div.logo ppp
+      div.logo OMF.Gcode
       div
         button.action-add-image Add Image
       div
         button Zoom
       div
-        input.config-zoom(value="2" type="range" min="1" max="10" step="1") 
+        input.config-zoom(value="10" type="range" min="5" max="15" step="1") 
       div
         button.action-apply-palette Apply Palette
       div
@@ -97,7 +97,6 @@ body
         button.action-clear Clear
         
   .row
-    .guide
     .dev-config
       form.config-form
         ul.config-list

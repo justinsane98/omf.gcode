@@ -30,7 +30,7 @@ input {
 }
 
 .visual-output {
-  flex-basis: 200px;
+  flex-basis: 300px;
 }
 
 .gcode-output {
@@ -52,7 +52,7 @@ textarea {
   right: 10px;
   bottom: 0;
   height: 100%;
-  width: 386px;
+  width: 524px;
 }
 
 nav {
@@ -89,7 +89,7 @@ label,.by {
 
 .canvas-wrapper {
   display: flex;
-  height: 200px;
+  height: 300px;
   background: $white;
   text-align: center;
   flex-direction: column;
@@ -132,17 +132,18 @@ h2 {
 
 .logo {
   position: absolute;
-  top: 2px;
+  top: 6px;
   left: 10px;
-  font-size: 30px;
+  font-size: 20px;
+  color: cyan;
 }
 .guide{
   background-color: $light-purple;
-  width: 80px;
+  width: 20px;
 }
 
 .dev-config {
-  background-color: $dark-purple;
+  background-color: $light-purple;
   padding: 20px 0;
   h2 {
     margin: 0 0 20px 0;
@@ -150,7 +151,7 @@ h2 {
 }
 
 .output {
-  width: 400px;
+  width: 600px;
 }
 
 .output-tools {
@@ -228,7 +229,7 @@ canvas {
   }
 }
 .stats {
-  height: 200px;
+  height: 300px;
   width: 100%;
   overflow-y: scroll;
   margin: 0;

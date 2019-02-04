@@ -1,6 +1,7 @@
+![Alt text](/screenshot.png "OMF.Gcode")
+
 # OMF.Gcode
 Original photo + Modifications = Fabication ready Gcode
-
 Import any image, select a palette and generate gcode to run on device running Marlin firmware. 
 
 ## Getting Started

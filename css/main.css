@@ -26,6 +26,7 @@ header {
   margin: 0;
   border: inset 10px rgba(0, 0, 0, 0.05);
   font-size: 1.5em;
+  height: 26px;
 }
 
 button {
@@ -63,6 +64,7 @@ textarea {
 }
 
 nav {
+  display: flex;
   justify-content: flex-end;
   font-size: 14px;
   line-height: 20px;
@@ -232,6 +234,34 @@ canvas {
 .output-tool-copy-gcode:before {
   top: 8px;
   left: -13px;
+}
+
+.canvas-wrapper, .stats, .gcode-output {
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+.canvas-wrapper.active, .stats.active, .gcode-output.active {
+  opacity: 1;
+}
+
+.add-image, .zoom-label, .zoom, .apply-palette, .generate-gcode, .copy-gcode, .clear {
+  max-width: 0;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+}
+.add-image.active, .zoom-label.active, .zoom.active, .apply-palette.active, .generate-gcode.active, .copy-gcode.active, .clear.active {
+  max-width: 500px;
+}
+
+.original, .modify, .fabricate {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+}
+.original.active, .modify.active, .fabricate.active {
+  opacity: 1;
+  max-height: 500px;
 }
 
 .stats {

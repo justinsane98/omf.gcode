@@ -8,17 +8,6 @@ script(src="js/app.js")
 script.
   // event handlers
   $(document).ready(function() {
-    
-    $('.action-generate-gcode').on("click",function(e) {
-      e.preventDefault();
-      output();
-    });
-
-    $('.action-copy-gcode').on("click",function(e) {
-      e.preventDefault();
-      $('#textarea-output').select();
-      document.execCommand("copy");
-    });
 
     $('.config-lift-distance').on("change", function(e){
       e.preventDefault();
@@ -49,12 +38,39 @@ script.
         clear_canvas();
         add_image_to_canvas(e);
         resize_canvas();
+
+        $('.canvas-wrapper').addClass('active');
+        $('.modify').addClass('active');
+        $('.zoom,.zoom-label, .apply-palette').addClass('active');
+        $('.add-image, .original').removeClass('active');
       }
     });
     
     $('.action-apply-palette').on("click", function(e) {
       e.preventDefault();
       get_pixels_from_canvas();
+      // POPULATE LIST HERE INSTEAD !!!
+      $('.canvas-output').addClass('active');
+      $('.fabricate, .stats').addClass('active');
+      $('.generate-gcode').addClass('active');
+
+      $('.modify, .apply-palette').removeClass('active');
+    });
+
+    $('.action-generate-gcode').on("click",function(e) {
+      e.preventDefault();
+      output();
+
+      $('.gcode-output').addClass('active');
+      $('.copy-gcode,.clear').addClass('active');
+
+      $('.modify, .apply-palette').removeClass('active');
+    });
+
+    $('.action-copy-gcode').on("click",function(e) {
+      e.preventDefault();
+      $('#textarea-output').select();
+      document.execCommand("copy");
     });
 
     $('.action-clear').on("click", function(e) {
@@ -62,6 +78,8 @@ script.
       clear_canvas();
       clear_stats();
       clear_gcode();
+      $('.active').not('.original, .add-image').removeClass('active');
+      $('.original, .add-image').addClass('active');
     });
 
     $('.config-zoom').on("change", function(e){
@@ -79,31 +97,32 @@ script.
   
 body
   header
-    nav.row
-      div.logo OMF.Gcode
-      div
-        button.action-add-image Add Image
-      div
+    div.logo OMF.Gcode
+    nav
+      .add-image.active
+        button.action-add-image Add Original
+      .zoom-label
         button Zoom
-      div
-        input.config-zoom(value="10" type="range" min="5" max="15" step="1") 
-      div
-        button.action-apply-palette Apply Palette
-      div
-        button.action-generate-gcode Generate
-      div
+      .zoom
+        input.config-zoom(value="5" type="range" min="5" max="15" step="1") 
+      .apply-palette
+        button.action-apply-palette Modify
+      .generate-gcode
+        button.action-generate-gcode Fabricate
+      .copy-gcode
         button.action-copy-gcode Copy Gcode
-      div
+      .clear
         button.action-clear Clear
         
   .row
     .dev-config
       form.config-form
-        ul.config-list
+        ul.original.config-list.active
           li.config-option
             label Image
               small=" (.jpg)"
             input.config-image(value="" type="file")
+        ul.modify.config-list
           li.config-option
             .row
               .column
@@ -127,8 +146,7 @@ body
               option(selected) rgb(255,255,255)
               option rgb(0,0,0)
 
-      form.config-form
-        ul.config-list
+        ul.fabricate.config-list
           li.config-option
             label Pixel Size 
               small (mm)

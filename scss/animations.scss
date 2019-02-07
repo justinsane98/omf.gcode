@@ -1,0 +1,27 @@
+.canvas-wrapper, .stats, .gcode-output {
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+    &.active {
+        opacity: 1;
+    }
+}
+   .add-image, .zoom-label, .zoom, .apply-palette, .generate-gcode, .copy-gcode, .clear {
+    max-width: 0;
+    max-height: $header-height;
+    overflow: hidden;
+    transition: all 200ms ease-in-out;
+    &.active {
+        max-width: 500px;
+    }
+}
+  
+  .original, .modify, .fabricate  {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 200ms ease-in-out;
+    &.active {
+        opacity: 1;
+        max-height: 500px;
+    }
+}

@@ -1,9 +1,8 @@
-@import 'main';
 body {
   font-size: 0.9em;
   background: $light-purple;
-  font-family: 'Roboto Condensed', sans-serif;
 }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -19,13 +18,9 @@ header {
   margin: 0;
   border: inset 10px rgba(0, 0, 0, 0.05); 
   font-size: 1.5em;
-  height: 26px;
+  display: flex;
 }
-
-button {
-  font-family: 'Roboto Condensed', sans-serif;
-}
-    
+  
 input {
   padding: 5px;
 }
@@ -49,14 +44,16 @@ textarea {
   position: absolute;
   display: block;
   top: 0;
-  left: 10px;
-  right: 10px;
+  left: 0;
+  right: 10;
   bottom: 0;
   height: 100%;
-  width: 524px;
+  width: 100%;
 }
 
 nav {
+  align-self: flex-end;
+  flex: 1;
   display: flex;
   justify-content: flex-end;
   font-size: 14px;
@@ -86,7 +83,6 @@ label,.by {
 .by {
   width: 20px;
   text-align: center;
-
 }
 
 .canvas-wrapper {
@@ -133,9 +129,6 @@ h2 {
 }
 
 .logo {
-  position: absolute;
-  top: 6px;
-  left: 10px;
   font-size: 20px;
   color: cyan;
 }
@@ -230,34 +223,6 @@ canvas {
     left: -13px;
   }
 }
-
-.canvas-wrapper, .stats, .gcode-output {
-  opacity: 0;
-  transition: all 200ms ease-in-out;
-  &.active {
-    opacity: 1;
-  }
-}
- .add-image, .zoom-label, .zoom, .apply-palette, .generate-gcode, .copy-gcode, .clear {
-  max-width: 0;
-  overflow: hidden;
-  transition: all 200ms ease-in-out;
-  &.active {
-    max-width: 500px;
-  }
-}
-
-.original, .modify, .fabricate  {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 200ms ease-in-out;
-  &.active {
-    opacity: 1;
-    max-height: 500px;
-  }
-}
-
 
 .stats {
   height: 300px;

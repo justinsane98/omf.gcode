@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
-
 $white: #fff;
 $black: #000;
 $form-padding: 20px;
@@ -9,8 +8,17 @@ $light-purple: #4f345a;
 $lighter-purple: #9990a5;
 $dark-purple: #29022B;
 
+$header-height: 25px;
+
 %ul-reset, %ul-reset > li {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+@import 'animations';
+@import 'layout';
